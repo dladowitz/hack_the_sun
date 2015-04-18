@@ -1,0 +1,31 @@
+%body
+  %script{"src" => "/d3.min.js"}
+  %link{"rel" => "stylesheet", "type" => "text/css", "href" => "/zatanna.css"}
+  #page
+    %header#header.site-header
+      = render "header"
+
+
+    %main#main.site-main
+      %section#carousel-1.carousel.slide.section-slide{"data-ride" => "carousel"}
+        .carousel-inner
+          .item.active{:style => "background: url(assets/background/solarhome.jpg); background-size:cover;"}
+            .main_content.pt10.pb40.col-sm-8.col-sm-offset-2
+              #d3.lineChart{"style" => "position: relative"}
+              %script
+                - if @monthly_data_json
+                  var chartData =
+                  = @monthly_data_json
+              %script{"src" => "/animation.js"}
+
+
+
+      %section.section.section-center.section-cta.pt10.pb20
+        .container
+
+
+    %footer#footer.site-footer.mt100
+      = render "footer"
+
+
+

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -#!!! 5
 -#%html(lang="en-US")
 -#  %head
@@ -12,5 +13,17 @@
 -#      %strong
 -#        %div{:class => "alert alert-#{name}", :role => "alert"}
 -#          = message
+=======
+!!! 5
+%html(lang="en-US")
+  %head
+    %title SolarStory
+    %script{"src" => "//code.jquery.com/jquery-1.11.2.min.js"}
+    %script{"src" => "//code.jquery.com/jquery-migrate-1.2.1.min.js"}
+    %script{"src" => "/jquery-ui.min.js"}
+    = stylesheet_link_tag    'landing_page/landing_page', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'landing_page/landing_page', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+>>>>>>> e6878b662fe412bd296f74938a5808b46c7dfd04
 
 = yield

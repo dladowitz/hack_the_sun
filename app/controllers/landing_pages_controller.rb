@@ -9,9 +9,8 @@ class LandingPagesController < ApplicationController
   end
 
   def calc_savings
-    monthly_data = data_for_zipcode(params[:Zip].to_i)
-    @monthly_data_json = { data: monthly_data }.to_json if monthly_data
-
+    monthly_data = data_for_zipcode(params[:zipcode].to_i)
+    @monthly_data_json = { data: monthly_data }.to_json.html_safe if monthly_data
     render layout: "landing_page/landing_layout"
   end
 
