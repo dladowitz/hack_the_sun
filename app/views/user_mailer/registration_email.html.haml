@@ -1,0 +1,24 @@
+.container
+  = image_tag attachments["logo_handwriting.png"].url, style: "width: 700px; margin-left: 25%;"
+
+  -#Css classes are not being loaded. Premailer gem is supposed to handle
+  .col-md-8.col-md-offset-2.mt50
+    .panel.panel-success
+      .panel-heading{style: "background-color: yellowgreen !important"}
+        .panel-title
+          %h2.text-center Thanks for signing up.
+      .panel-body
+        %h3.text-center Keep an eye out for updates in the coming weeks.
+        %p
+          We are planning on rolling out some great tools in the next few weeks
+
+        %h3 Things you can start doing now
+        %ul
+          %li Thing 1
+          %li Thing 2
+          %li Thing 3
+          %li Thing 4
+
+      .panel-footer
+        %h5
+        = link_to "LaunchIt", "#", class: "blue underline text-center"

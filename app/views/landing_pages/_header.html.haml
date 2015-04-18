@@ -1,0 +1,18 @@
+%nav#navbar.site-navbar.navbar.navbar-static-top{:role => "navigation"}
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => "#navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %i.fa.fa-bars
+      %h1.navbar-brand
+        %a{:style => "font-size: 35px", :href => "#"}
+          LaunchIt
+
+    #navbar-collapse-1.collapse.navbar-collapse
+      %ul#navigation.nav.navbar-nav.navbar-right
+        %li.active
+          %a.external{:href => "/"} Home
+        %li
+          %a.external{href: "/signup"} Sign Up
+        %li
+          %a.external{href: "/signin"} Sign In

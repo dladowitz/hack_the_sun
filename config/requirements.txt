@@ -1,0 +1,30 @@
+Things needed for rails template
+
+v1
+x Gems
+x Landing Page & Bootstrap Template
+x Dashboard and Boostrap Template
+x CSS file for custom styles shared between landing and dashboard. Custom styles for each also
+x User Login system
+x Authentication system
+x Haml and SCSS
+x Model Validation Error partial
+x Deal with Registration Header being used in weird places
+x Google analytics
+x Font Awesome
+x Rspec
+x Cucumber and Capybara
+x Factories
+x Set up Mailer, CSS injection, mailcatching in development
+x Fixture builder
+
+
+v2
+Fix Tests
+Breadcrumbs
+Create a constant for App/Company name
+Add Seed File
+x Password Reset
+x Edit Account
+x Make other user admin
+x Welcome Email

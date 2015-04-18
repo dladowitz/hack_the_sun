@@ -1,0 +1,23 @@
+/*
+ * Manifest for landing page.
+ * Note that 'landing_page/landing_page.css' has been added to Rails.application.config.assets.precompile in assets.rb
+ *
+ *= require_self
+ //= require landing_page/landing_template_start
+ //= require ../shared/shared
+ */
+
+// landing_template_start.css has overidden bootstrap classes.
+// Uncomment next line if need original bootstrap classes.
+// @import "bootstrap";
+
+@import "font-awesome";
+
+//////// Styles limited to the landing page \\\\\\\\\\
+
+.main_content {
+  background-color: rgba(255,255,255,0.75);
+  border-radius: 5px;
+  min-height: 300px !important;
+}
+
