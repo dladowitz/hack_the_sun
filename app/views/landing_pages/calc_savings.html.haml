@@ -12,10 +12,11 @@
           .item.active{:style => "background: url(assets/background/solarhome.jpg); background-size:cover;"}
             .main_content.pt10.pb40.col-sm-8.col-sm-offset-2
               #d3.lineChart{"style" => "position: relative"}
-              %script{"src" => "/animation.js"}
-              :javascript
+              %script
                 - if @monthly_data_json
+                  var chartData =
                   = @monthly_data_json
+              %script{"src" => "/animation.js"}
 
 
 
