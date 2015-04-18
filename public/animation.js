@@ -9,7 +9,7 @@ var milestones = [
 
 
 
-var margin = {top: 20, right: 80, bottom: 30, left: 50},
+var margin = {top: 0, right: 80, bottom: 0, left: 250},
     width = 100000,
     height = 400 - margin.top - margin.bottom;
 
@@ -103,8 +103,19 @@ function render(data) {
   //     .attr("dy", ".35em")
   //     .text(function (d) { return d.name; });
 
+    //move the chart over and add labels for lines
+    // $("#d3 svg").css("margin-left", 300);
+    svg.append("text")
+        .attr("x", -220)
+        .attr("y", data[0].values[0] + 10)
+        .attr("font-size", "26")
+        .text("Cost from the grid");
 
-
+    svg.append("text")
+        .attr("x", -180)
+        .attr("y", data[0].values[1] + 305)
+        .attr("font-size", "26")
+        .text("Cost with solar");
 
     console.log("Render done");
 
