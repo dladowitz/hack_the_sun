@@ -1,4 +1,6 @@
 %body
+  %script{"src" => "/d3.min.js"}
+  %link{"rel" => "stylesheet", "type" => "text/css", "href" => "zatanna.css"}
   #page
     %header#header.site-header
       = render "header"
@@ -10,13 +12,8 @@
           .item.active{:style => "background: url(assets/background/solarhome.jpg); background-size:cover;"}
             .container
               .main_content.pt10.pb40.col-sm-8.col-sm-offset-2
-                %h1.section-title
-                  %span Savings over time
-                %h2
-                  %span
-                    %span.fa.fa-money
-                    Show savings here
-
+                #d3
+                %script{"src" => "/animation.js"}
 
       %section.section.section-center.section-cta.pt10.pb20
         .container
