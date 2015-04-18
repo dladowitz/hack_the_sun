@@ -10,10 +10,9 @@
       %section#carousel-1.carousel.slide.section-slide{"data-ride" => "carousel"}
         .carousel-inner
           .item.active{:style => "background: url(assets/background/solarhome.jpg); background-size:cover;"}
-            .container
-              .main_content.pt10.pb40.col-sm-8.col-sm-offset-2
-                #d3.lineChart
-                %script{"src" => "/animation.js"}
+            .main_content.pt10.pb40.col-sm-8.col-sm-offset-2
+              #d3.lineChart{"style" => "position: relative"}
+              %script{"src" => "/animation.js"}
 
       %section.section.section-center.section-cta.pt10.pb20
         .container
