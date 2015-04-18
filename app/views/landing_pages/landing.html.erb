@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!-- This site was created in Webflow. http://www.webflow.com-->
+<!-- Last Published: Sat Apr 18 2015 23:22:32 GMT+0000 (UTC) -->
+<html data-wf-site="552a2f79416f90126f4e75b4" data-wf-page="5532d5b6fd7ee5b552c322d1">
+<head>
+  <meta charset="utf-8">
+  <title>Splash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Webflow">
+  <link rel="stylesheet" type="text/css" href="assets/landing_page/normalize.css">
+  <link rel="stylesheet" type="text/css" href="assets/landing_page/webflow.css">
+  <link rel="stylesheet" type="text/css" href="assets/landing_page/rows.webflow.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
+      }
+    });
+  </script>
+  <script type="text/javascript" src="assets/landing_page/modernizr.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico">
+  <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
+</head>
+<body>
+<div class="w-section logo-section">
+  <div class="w-container logo-contain"><img class="logo-img-splash" src="assets/HTS-Logo-v2.png" alt="5532e6cc86ac3db85c98ee5d_HTS-Logo-v2.png">
+  </div>
+</div>
+<div class="guide-div">Did you know?</div>
+<p class="text">Powering your home with solar can start saving your family money today with no out-of-pocket costs to get started.</p>
+<div class="w-section input-section">
+  <div class="w-container input-contain">
+    <div class="w-form form-wrapper">
+
+      <form action="/calc_savings" method="post">
+        <input class="w-input zip-code-input" id="Zip" type="text" placeholder="enter your zip code" name="Zip" data-name="Zip">
+        <input class="w-button button" type="submit" value="Submit" data-wait="Please wait...">
+      </form>
+
+      <!--<form class="zip-form" id="wf-form-zip-code-form" name="wf-form-zip-code-form" data-name="zip-code-form">-->
+        <!--<input class="w-input zip-code-input" id="Zip" type="text" placeholder="enter your zip code" name="Zip" data-name="Zip">-->
+        <!--<input class="w-button button" type="submit" value="Submit" data-wait="Please wait...">-->
+      <!--</form>-->
+
+
+
+      <div class="w-form-done">
+        <p>Thank you! Your submission has been received!</p>
+      </div>
+      <div class="w-form-fail">
+        <p>Oops! Something went wrong while submitting the form :(</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="assets/landing_page/webflow.js"></script>
+<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>
+
+
+
+
+
+
+<!--%body-->
+  <!--#page-->
+    <!--%header#header.site-header-->
+      <!--= render "header"-->
+
+
+    <!--%main#main.site-main-->
+      <!--%section#carousel-1.carousel.slide.section-slide{"data-ride" => "carousel"}-->
+        <!--.carousel-inner-->
+          <!--.item.active{:style => "background: url(assets/background/solarhome.jpg); background-size:cover;"}-->
+            <!--.container-->
+              <!--.main_content.pt10.pb40.col-sm-8.col-sm-offset-2-->
+                <!--%h1.section-title-->
+                  <!--%span Welcome to SunStory-->
+                <!--%h2-->
+                  <!--%span-->
+                    <!--%span.fa.fa-bolt-->
+                    <!--Solar Pays. Lets see how-->
+
+                <!--= form_tag("/calc_savings", method: "post") do-->
+                  <!--.form-group-->
+                    <!--= label_tag :zipcode-->
+                    <!--= number_field_tag :zipcode, nil, placeholder: 94109-->
+                  <!--= submit_tag "Show Estimate", class: "btn btn-primary"-->
+
+      <!--%section.section.section-center.section-cta.pt10.pb20-->
+        <!--.container-->
+
+
+    <!--%footer#footer.site-footer.mt100-->
+      <!--= render "footer"-->
+
+
+
