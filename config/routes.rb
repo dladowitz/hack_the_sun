@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   # custom routes
   post   :calc_savings,     to: "landing_pages#calc_savings", as: :calc_savings
-  # get    :savings,          to: "landing_pages#savings",    as: :savings
   get    :landing,          to: "landing_pages#landing",      as: :landing
 
   get    :signin,      to: "sessions#new",               as: :signin

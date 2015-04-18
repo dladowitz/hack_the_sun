@@ -20,7 +20,7 @@
                 = form_tag("/calc_savings", method: "post") do
                   .form-group
                     = label_tag :zipcode
-                    = number_field_tag :zipcode, min: 999, max: 99999
+                    = number_field_tag :zipcode, nil, placeholder: 94109
                   = submit_tag "Show Estimate", class: "btn btn-primary"
 
       %section.section.section-center.section-cta.pt10.pb20

@@ -15,8 +15,9 @@
                 %h2
                   %span
                     %span.fa.fa-money
-                %span
-                  = @time_data_json
+                - if @monthly_data_json
+                  %span
+                    = @monthly_data_json
 
 
       %section.section.section-center.section-cta.pt10.pb20
