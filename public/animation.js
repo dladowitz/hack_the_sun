@@ -1,5 +1,14 @@
 /*global d3:false, Exception:false */
 
+var milestones = [
+    {name: "Diamond Ring", amount: 4500, number: 1},
+    {name: "Costa Rica Family Vacation", amount: 11000, number: 2},
+    {name: "College Fund for Jennie", amount: 30000, number: 3},
+    {name: "Home Renovation", /*no amount,*/ number: 4}
+];
+
+
+
 var margin = {top: 20, right: 80, bottom: 30, left: 50},
     width = 100000,
     height = 400 - margin.top - margin.bottom;
@@ -44,11 +53,11 @@ function render(data) {
     d.date = parseDate(d.date);
   });
 
-  var cities = color.domain().map(function(name) {
+  var series = color.domain().map(function(name) {
     return {
       name: name,
       values: data.map(function (d) {
-          return {date: d.date, value: +d.values[(name === "grid" ? 0 : 1)]};
+                    return {date: d.date, value: +d.values[(name === "grid" ? 0 : 1)]};
       })
     };
   });
@@ -56,14 +65,14 @@ function render(data) {
   x.domain(d3.extent(data, function (d) { return d.date; }));
 
   y.domain([
-    d3.min(cities, function(c) { return d3.min(c.values, function(v) { return v.value; }); }),
-    d3.max(cities, function(c) { return d3.max(c.values, function(v) { return v.value; }); })
+    d3.min(series, function(c) { return d3.min(c.values, function(v) { return v.value; }); }),
+    d3.max(series, function(c) { return d3.max(c.values, function(v) { return v.value; }); })
   ]);
 
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+  // svg.append("g")
+  //     .attr("class", "x axis")
+  //     .attr("transform", "translate(0," + height + ")")
+  //     .call(xAxis);
 
   /*
   svg.append("g")
@@ -77,40 +86,100 @@ function render(data) {
       .text("Temperature (ºF)");
   */
 
-  var city = svg.selectAll(".city")
-      .data(cities)
-    .enter().append("g")
-      .attr("class", "city");
+    var source = svg.selectAll(".source")
+                  .data(series)
+                  .enter().append("g")
+                  .attr("class", "source");
 
-  city.append("path")
-      .attr("class", "line")
-      .attr("d", function (d) { return line(d.values); })
-      .style("stroke", function (d) { return color(d.name); });
+    source.append("path")
+        .attr("class", "line")
+        .attr("d", function (d) { return line(d.values); })
+        .style("stroke", function (d) { return color(d.name); });
 
-  // city.append("text")
+  // source.append("text")
   //     .datum(function (d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
   //     .attr("transform", function (d) { return "translate(" + x(d.value.date) + "," + y(d.value) + ")"; })
   //     .attr("x", 3)
   //     .attr("dy", ".35em")
   //     .text(function (d) { return d.name; });
 
+
+
+
     console.log("Render done");
 
     $("#d3 svg").animate(
-        {"margin-left": -100000 + window.innerWidth},
-        30000,
-        "easeInOutQuad",
-        function () {
-            console.log("animation 1 done");
+        {"margin-left": -100000 + window.innerWidth / 2},
+        {
+            duration: 30000,
+            easing: "easeInOutQuad",
+            progress: function (animation, progress, remaining) {
+                //retrieve the index within the array based upon the % to the array length
+                var indexToDataArray = Math.ceil(progress * data.length),
+                    item = data[indexToDataArray],
+                    dt = item.date,
+                    saved = item.totalSavings;
+
+                if (indexToDataArray >= data.length) {
+                    indexToDataArray = data.length;
+                }
+
+                //get the data
+                $("#theDate").text(dt.getFullYear());
+
+                //retrieve the sum
+                $("#totalSaved").text(
+                    "$" + Number(saved).toLocaleString('en')
+                );
+
+                //if savings is enough to trigger milestone, show the milestone
+                $.each(milestones, function (idx, milestone) {
+                    if (saved >= milestone.amount) {
+                        //if milestone hasn't been shown yet
+                        if($("#m" + milestone.number).css("display") !== "inline") {
+                                //add the milestone to the graph
+                                svg.append("svg:image")
+                                   .attr('x', x(dt))
+                                   .attr('y', y(item.values[0] - item.values[1]) - 70)
+                                   .attr('width', 256)
+                                   .attr('height', 256)
+                                   .attr("xlink:href","/assets/milestones/HTS-Milestone-0"+ milestone.number +".png")
+                                   .attr("class", "milestone");
+                        }
+
+                        $("#m" + milestone.number).css("display", "inline");
+                    }
+                });
+
+                if(progress >= 0.98) {
+                    //add the last milestone
+                    svg.append("svg:image")
+                       .attr('x', x(data[data.length-2].date))
+                       .attr('y', y(data[data.length-2].values[0] - data[data.length-2].values[1]) - 70)
+                       .attr('width', 256)
+                       .attr('height', 256)
+                       .attr("xlink:href","/assets/milestones/HTS-Milestone-04.png")
+                       .attr("class", "milestone");
+
+                    $("#m4").css("display", "inline");
+                }
+            },
+            complete: function () {
+                console.log("animation 1 done");
+            }
         }
     );
 }
 
 if (chartData) {
-    render(chartData.data.map(function (row) { return { date: row[0], values: [row[1], row[2]] }; }));
+    var sum = 0;
+
+    render(chartData.data.map(function (row) {
+        sum += row[1] - row[2];
+        return { date: row[0], values: [row[1], row[2]], totalSavings: sum };
+    }));
 } else {
     console.log("can't find data");
 }
 
 
-console.log(data[0].values);

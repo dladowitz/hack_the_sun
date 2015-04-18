@@ -10,13 +10,28 @@
       %section#carousel-1.carousel.slide.section-slide{"data-ride" => "carousel"}
         .carousel-inner
           .item.active{:style => "background: url(assets/background/solarhome.jpg); background-size:cover;"}
-            .main_content.pt10.pb40.col-sm-8.col-sm-offset-2
+            .main_content.pt10.pb40.col-sm-12
+
+              //need everything within this div!!
+
+              #theDate
+              #totalSaved
               #d3.lineChart{"style" => "position: relative"}
               %script
                 - if @monthly_data_json
                   var chartData =
                   = @monthly_data_json
               %script{"src" => "/animation.js"}
+
+              #milestones
+                #m1
+                  = image_tag "milestones/HTS-Milestone-01.png"
+                #m2
+                  = image_tag "milestones/HTS-Milestone-02.png"
+                #m3
+                  = image_tag "milestones/HTS-Milestone-03.png"
+                #m4
+                  = image_tag "milestones/HTS-Milestone-04.png"
 
 
 
