@@ -1,0 +1,86 @@
+<body>
+  <div class="w-section logo-section">
+    <div class="w-container logo-contain">
+      <div class="w-row logo-image">
+        <div class="w-col w-col-6 logo-left"><img src="assets/HTS-Logo-v2.png" width="200" alt="5532d4486ca197b65278cb24_HTS-Logo-v2.png">
+        </div>
+        <div class="w-col w-col-6 logo-right"></div>
+      </div>
+    </div>
+  </div>
+  <div class="w-section graph-section">
+    <div class="w-container graph-contain"></div>
+  </div>
+  <div class="w-section icon-section">
+    <div class="w-container icon-container">
+      <div class="w-row icons-row">
+        <div class="w-col w-col-3">
+          <div class="icon-block block1" data-ix="emerge"><img class="icon-img" src="assets/HTS-Milestone-01.png" width="128" alt="5532cd656ca197b65278cabf_HTS-Milestone-01.png">
+            <h3 class="icon-h3">Shiny&nbsp;Things</h3>
+            <h4 class="icon-amount">$100-500</h4>
+          </div>
+        </div>
+        <div class="w-col w-col-3">
+          <div class="icon-block block2" data-ix="emerge-2"><img class="icon-img" src="assets/HTS-Milestone-02.png" width="128" alt="5532cd7286ac3db85c98ea6b_HTS-Milestone-02.png">
+            <h3 class="icon-h3">Costa Rica</h3>
+            <h4 class="icon-amount">$1000-1500</h4>
+          </div>
+        </div>
+        <div class="w-col w-col-3">
+          <div class="icon-block block3" data-ix="emerge-3"><img class="icon-img" src="assets/HTS-Milestone-03.png" width="128" alt="5532cd82fd7ee5b552c32233_HTS-Milestone-03.png">
+            <h3 class="icon-h3">College Fund</h3>
+            <h4 class="icon-amount">$40,000-80,000</h4>
+          </div>
+        </div>
+        <div class="w-col w-col-3">
+          <div class="icon-block block4" data-ix="emerge-4"><img class="icon-img" src="assets/HTS-Milestone-04.png" width="123" alt="5532cd90777d17b75ce86dbd_HTS-Milestone-04.png">
+            <h3 class="icon-h3">Home Renovation</h3>
+            <h4 class="icon-amount">$90,000-140,000</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-section field-section">
+    <div class="w-container field-contain">
+      <div class="w-row">
+        <div class="w-col w-col-6 field-column-text">
+          <h1>Thanks, sunshine!</h1>
+          <p>Thinking about your next vacation powered by solar savings? We thought so. All we ask is that we get to come along to Costa Rica.</p>
+        </div>
+        <div class="w-col w-col-6"></div>
+      </div>
+    </div>
+  </div>
+</body>
+<!--%body-->
+  <!--#page-->
+    <!--%header#header.site-header-->
+      <!--= render "header"-->
+
+
+    <!--%main#main.site-main-->
+      <!--%section#carousel-1.carousel.slide.section-slide{"data-ride" => "carousel"}-->
+        <!--.carousel-inner-->
+          <!--.item.active{:style => "background: url(assets/background/solarhome.jpg); background-size:cover;"}-->
+            <!--.container-->
+              <!--.main_content.pt10.pb40.col-sm-8.col-sm-offset-2-->
+                <!--%h1.section-title-->
+                  <!--%span Savings over time-->
+                <!--%h2-->
+                  <!--%span-->
+                    <!--%span.fa.fa-money-->
+                <!--- if @monthly_data_json-->
+                  <!--%span-->
+                    <!--= @monthly_data_json-->
+
+
+      <!--%section.section.section-center.section-cta.pt10.pb20-->
+        <!--.container-->
+
+
+    <!--%footer#footer.site-footer.mt100-->
+      <!--= render "footer"-->
+
+
+
