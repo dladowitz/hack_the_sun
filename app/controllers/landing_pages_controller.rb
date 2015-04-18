@@ -11,9 +11,9 @@ class LandingPagesController < ApplicationController
     render layout: "landing_page/landing_layout"
   end
 
-  def savings
-    render layout: "landing_page/landing_layout"
-  end
+  # def savings
+  #   render layout: "landing_page/landing_layout"
+  # end
 
 
 
