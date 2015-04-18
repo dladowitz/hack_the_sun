@@ -13,6 +13,11 @@
             .main_content.pt10.pb40.col-sm-8.col-sm-offset-2
               #d3.lineChart{"style" => "position: relative"}
               %script{"src" => "/animation.js"}
+              :javascript
+                - if @monthly_data_json
+                  = @monthly_data_json
+
+
 
       %section.section.section-center.section-cta.pt10.pb20
         .container
