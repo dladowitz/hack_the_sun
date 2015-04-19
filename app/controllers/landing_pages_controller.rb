@@ -18,7 +18,7 @@ class LandingPagesController < ApplicationController
 
   def data_for_zipcode(zipcode)
     case zipcode
-      when 94621
+      when 94612
         return OAKLAND
       when 92673
         return SAN_CLEMENTE
