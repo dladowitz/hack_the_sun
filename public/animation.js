@@ -9,7 +9,7 @@ var milestones = [
 
 
 
-var margin = {top: 0, right: 80, bottom: 0, left: 250},
+var margin = {top: 0, right: 80, bottom: 20, left: 250},
     width = 100000,
     height = 400 - margin.top - margin.bottom;
 
@@ -36,6 +36,7 @@ var line = d3.svg.line()
     .interpolate("basis")
     .x(function (d) { return x(d.date); })
     .y(function (d) { return y(d.value); });
+console.log("animation.js start");
 
 var svg = d3.select("#d3").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -107,17 +108,18 @@ function render(data) {
     // $("#d3 svg").css("margin-left", 300);
     svg.append("text")
         .attr("x", -220)
-        .attr("y", data[0].values[0] + 10)
+        .attr("y", data[0].values[0])
         .attr("font-size", "26")
         .text("Cost from the grid");
 
     svg.append("text")
         .attr("x", -180)
-        .attr("y", data[0].values[1] + 305)
+        .attr("y", data[0].values[1] + 290)
         .attr("font-size", "26")
         .text("Cost with solar");
 
     console.log("Render done");
+
 
     $("#d3 svg").animate(
         {"margin-left": -100000 + window.innerWidth / 2},
@@ -147,7 +149,7 @@ function render(data) {
                 $.each(milestones, function (idx, milestone) {
                     if (saved >= milestone.amount) {
                         //if milestone hasn't been shown yet
-                        if($("#m" + milestone.number).css("display") !== "inline") {
+                        if($("#m" + milestone.number).css("display") === "none") {
                                 //add the milestone to the graph
                                 svg.append("svg:image")
                                    .attr('x', x(dt))
@@ -158,7 +160,7 @@ function render(data) {
                                    .attr("class", "milestone");
                         }
 
-                        $("#m" + milestone.number).css("display", "inline");
+                        $("#m" + milestone.number).css("display", "inherit");
                     }
                 });
 
@@ -172,7 +174,7 @@ function render(data) {
                        .attr("xlink:href","/assets/milestones/HTS-Milestone-04.png")
                        .attr("class", "milestone");
 
-                    $("#m4").css("display", "inline");
+                    $("#m4").css("display", "inherit");
                 }
             },
             complete: function () {
@@ -192,5 +194,3 @@ if (chartData) {
 } else {
     console.log("can't find data");
 }
-
-
