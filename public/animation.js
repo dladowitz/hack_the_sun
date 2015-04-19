@@ -1,4 +1,5 @@
-/*global d3:false, Exception:false */
+/*global $:false, d3:false, Exception:false, window:false, chartData:false, console:false */
+'use strict';
 
 var milestones = [
     {name: "Diamond Ring", amount: 4500, number: 1},
@@ -36,39 +37,36 @@ var line = d3.svg.line()
     .interpolate("basis")
     .x(function (d) { return x(d.date); })
     .y(function (d) { return y(d.value); });
-console.log("animation.js start");
 
 var svg = d3.select("#d3").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
 function render(data) {
-    'use strict';
+    color = d3.scale.category10().domain(["grid", "solar"]);
 
-  color = d3.scale.category10().domain(["grid", "solar"]);
+    data.forEach(function (d) {
+        d.date = parseDate(d.date);
+    });
 
-  data.forEach(function (d) {
-    d.date = parseDate(d.date);
-  });
+    var series = color.domain().map(function (name) {
+        return {
+            name: name,
+            values: data.map(function (d) {
+                return {date: d.date, value: +d.values[(name === "grid" ? 0 : 1)]};
+            })
+        };
+    });
 
-  var series = color.domain().map(function(name) {
-    return {
-      name: name,
-      values: data.map(function (d) {
-                    return {date: d.date, value: +d.values[(name === "grid" ? 0 : 1)]};
-      })
-    };
-  });
+    x.domain(d3.extent(data, function (d) { return d.date; }));
 
-  x.domain(d3.extent(data, function (d) { return d.date; }));
-
-  y.domain([
-    d3.min(series, function(c) { return d3.min(c.values, function(v) { return v.value; }); }),
-    d3.max(series, function(c) { return d3.max(c.values, function(v) { return v.value; }); })
-  ]);
+    y.domain([
+        d3.min(series, function (c) { return d3.min(c.values, function (v) { return v.value; }); }),
+        d3.max(series, function (c) { return d3.max(c.values, function (v) { return v.value; }); })
+    ]);
 
   // svg.append("g")
   //     .attr("class", "x axis")
@@ -97,12 +95,12 @@ function render(data) {
         .attr("d", function (d) { return line(d.values); })
         .style("stroke", function (d) { return color(d.name); });
 
-  // source.append("text")
-  //     .datum(function (d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-  //     .attr("transform", function (d) { return "translate(" + x(d.value.date) + "," + y(d.value) + ")"; })
-  //     .attr("x", 3)
-  //     .attr("dy", ".35em")
-  //     .text(function (d) { return d.name; });
+    // source.append("text")
+    //     .datum(function (d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+    //     .attr("transform", function (d) { return "translate(" + x(d.value.date) + "," + y(d.value) + ")"; })
+    //     .attr("x", 3)
+    //     .attr("dy", ".35em")
+    //     .text(function (d) { return d.name; });
 
     //move the chart over and add labels for lines
     // $("#d3 svg").css("margin-left", 300);
@@ -119,7 +117,6 @@ function render(data) {
         .text("Cost with solar");
 
     console.log("Render done");
-
 
     $("#d3 svg").animate(
         {"margin-left": -100000 + window.innerWidth / 2},
@@ -149,30 +146,33 @@ function render(data) {
                 $.each(milestones, function (idx, milestone) {
                     if (saved >= milestone.amount) {
                         //if milestone hasn't been shown yet
-                        if($("#m" + milestone.number).css("display") === "none") {
-                                //add the milestone to the graph
-                                svg.append("svg:image")
-                                   .attr('x', x(dt))
-                                   .attr('y', y(item.values[0] - item.values[1]) - 70)
-                                   .attr('width', 256)
-                                   .attr('height', 256)
-                                   .attr("xlink:href","/assets/milestones/HTS-Milestone-0"+ milestone.number +".png")
-                                   .attr("class", "milestone");
+                        if ($("#m" + milestone.number).css("display") === "none") {
+                            console.log("show milestone at " + dt + ", x=" + x(dt));
+                            //add the milestone to the graph
+                            svg.append("svg:image")
+                                .attr('x', -1 * parseInt($("svg").css("margin-left"), 10) + window.innerWidth * 0.5)
+                                .attr('y', y(item.values[0] - item.values[1]) - 70)
+                                .attr('width', 256)
+                                .attr('height', 256)
+                                .attr("xlink:href", "/assets/milestones/HTS-Milestone-0" + milestone.number + ".png")
+                                .attr("class", "milestone");
+                            // debugger;
                         }
 
                         $("#m" + milestone.number).css("display", "inherit");
+                        console.log("display milestone" + milestone.number)
                     }
                 });
 
-                if(progress >= 0.98) {
+                if (progress >= 0.98) {
                     //add the last milestone
                     svg.append("svg:image")
-                       .attr('x', x(data[data.length-2].date))
-                       .attr('y', y(data[data.length-2].values[0] - data[data.length-2].values[1]) - 70)
-                       .attr('width', 256)
-                       .attr('height', 256)
-                       .attr("xlink:href","/assets/milestones/HTS-Milestone-04.png")
-                       .attr("class", "milestone");
+                        .attr('x', x(data[data.length - 2].date))
+                        .attr('y', y(data[data.length - 2].values[0] - data[data.length - 2].values[1]) - 70)
+                        .attr('width', 256)
+                        .attr('height', 256)
+                        .attr("xlink:href", "/assets/milestones/HTS-Milestone-04.png")
+                        .attr("class", "milestone");
 
                     $("#m4").css("display", "inherit");
                 }
