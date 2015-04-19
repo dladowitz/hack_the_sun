@@ -11,7 +11,7 @@ var milestones = [
 
 
 var margin = {top: 0, right: 80, bottom: 20, left: 250},
-    width = 100000,
+    width = 50000,
     height = 400 - margin.top - margin.bottom;
 
 var parseDate = d3.time.format("%Y-%m-%d").parse;
@@ -119,7 +119,7 @@ function render(data) {
     console.log("Render done");
 
     $("#d3 svg").animate(
-        {"margin-left": -100000 + window.innerWidth / 2},
+        {"margin-left": -50000 + window.innerWidth / 2},
         {
             duration: 30000,
             easing: "easeInOutQuad",
@@ -144,37 +144,33 @@ function render(data) {
 
                 //if savings is enough to trigger milestone, show the milestone
                 $.each(milestones, function (idx, milestone) {
-                    if (saved >= milestone.amount) {
+                    if (saved >= milestone.amount && $("#m" + milestone.number).css("display") === "none") {
                         //if milestone hasn't been shown yet
-                        if ($("#m" + milestone.number).css("display") === "none") {
-                            console.log("show milestone at " + dt + ", x=" + x(dt));
-                            //add the milestone to the graph
-                            svg.append("svg:image")
-                                .attr('x', -1 * parseInt($("svg").css("margin-left"), 10) + window.innerWidth * 0.5)
-                                .attr('y', y(item.values[0] - item.values[1]) - 70)
-                                .attr('width', 256)
-                                .attr('height', 256)
-                                .attr("xlink:href", "/assets/milestones/HTS-Milestone-0" + milestone.number + ".png")
-                                .attr("class", "milestone");
-                            // debugger;
-                        }
 
-                        $("#m" + milestone.number).css("display", "inherit");
-                        console.log("display milestone" + milestone.number)
+                        //add the milestone to the graph
+                        svg.append("svg:image")
+                            .attr('x', -1 * parseInt($("svg").css("margin-left"), 10) + window.innerWidth * 0.5)
+                            .attr('y', y(item.values[0] - item.values[1]) - 150)
+                            .attr('width', 256)
+                            .attr('height', 256)
+                            .attr("xlink:href", "/assets/milestones/HTS-Milestone-0" + milestone.number + ".png")
+                            .attr("class", "milestone");
+
+                        $("#m" + milestone.number).show(500);
                     }
                 });
 
                 if (progress >= 0.98) {
                     //add the last milestone
                     svg.append("svg:image")
-                        .attr('x', x(data[data.length - 2].date))
+                        .attr('x', x(data[data.length - 2].date) - 90)
                         .attr('y', y(data[data.length - 2].values[0] - data[data.length - 2].values[1]) - 70)
                         .attr('width', 256)
                         .attr('height', 256)
                         .attr("xlink:href", "/assets/milestones/HTS-Milestone-04.png")
                         .attr("class", "milestone");
 
-                    $("#m4").css("display", "inherit");
+                    $("#m4").show(500);
                 }
             },
             complete: function () {
